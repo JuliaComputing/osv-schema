@@ -55,6 +55,13 @@ func existsInHackage(pkg string) bool {
 	return checkPackageExists(packageInstanceURL)
 }
 
+// Validate the existence of a package in Julia.
+func existsInJulia(pkg string) bool {
+	packageInstanceURL := fmt.Sprintf("%s/%s/versions.json", EcosystemBaseURLs["Julia"], pkg)
+
+	return checkPackageExists(packageInstanceURL)
+}
+
 // Validate the existence of a package in Maven.
 func existsInMaven(pkg string) bool {
 	if !strings.Contains(pkg, ":") {

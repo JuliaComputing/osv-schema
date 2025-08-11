@@ -9,6 +9,7 @@ var SupportedEcosystems = []string{
 	"crates.io",
 	"Go",
 	"Hackage",
+	"Julia",
 	"Maven",
 	"npm",
 	"NuGet",
@@ -23,6 +24,7 @@ var EcosystemBaseURLs = map[string]string{
 	"crates.io": "https://crates.io/api/v1/crates",
 	"Go":        "https://proxy.golang.org",
 	"Hackage":   "https://hackage.haskell.org/package",
+	"Julia": 	 "https://juliahub.com/docs/General",
 	"Maven":     "https://search.maven.org/solrsearch/select",
 	"npm":       "https://registry.npmjs.org",
 	"NuGet":     "https://api.nuget.org/v3-flatcontainer",
@@ -63,6 +65,8 @@ func ExistsInEcosystem(pkg string, ecosystem string) bool {
 		return existsInHackage(pkg)
 	case "Hex":
 		return true
+	case "Julia":
+		return existsInJulia(pkg)
 	case "Kubernetes":
 		return true
 	case "Linux":
@@ -146,6 +150,8 @@ func VersionsExistInEcosystem(pkg string, versions []string, ecosystem string) e
 		return nil
 	case "Hackage":
 		return nil
+	case "Julia":
+		return versionsExistInJulia(pkg, versions)
 	case "Hex":
 		return nil
 	case "Linux":
